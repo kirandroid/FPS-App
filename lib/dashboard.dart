@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fps/addproduct.dart';
+import 'package:fps/allProducts.dart';
+import 'package:fps/scanProduct.dart';
 import 'package:fps/signin.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -116,8 +118,8 @@ class _DashboardState extends State<Dashboard> {
               padding: const EdgeInsets.all(24.0),
               child: InkWell(
                 onTap: () {
-                  // Navigator.push(context,
-                  //     MaterialPageRoute(builder: (context) => SignInScreen()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => AllProducts()));
                 },
                 child: Container(
                   height: 50,
@@ -129,6 +131,32 @@ class _DashboardState extends State<Dashboard> {
                   child: Center(
                       child: Text(
                     'View All Product',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ScanProduct()));
+                },
+                child: Container(
+                  height: 50,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: Colors.redAccent,
+                  ),
+                  child: Center(
+                      child: Text(
+                    'Scan Product',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 20,

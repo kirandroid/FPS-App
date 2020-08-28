@@ -49,7 +49,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox()
+                      SizedBox(width: 32.0),
                     ],
                   ),
                 ),
