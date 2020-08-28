@@ -89,7 +89,18 @@ class _ProductInfoState extends State<ProductInfo> {
             status == 'FAKE'
                 ? Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Image.asset('asset/error.png'),
+                    child: Column(
+                      children: [
+                        Image.asset('asset/error.png'),
+                        Text(
+                          'No Such Products Found',
+                          style: GoogleFonts.poppins(
+                            fontSize: 18,
+                            color: Color(0xff),
+                          ),
+                        )
+                      ],
+                    ),
                   )
                 : Padding(
                     padding: const EdgeInsets.all(32.0),
