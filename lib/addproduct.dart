@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fps/core/app_config.dart';
 import 'package:fps/dashboard.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:uuid/uuid.dart';
 
 class AddProductScreen extends StatefulWidget {
   AddProductScreen({Key key}) : super(key: key);
@@ -10,6 +12,39 @@ class AddProductScreen extends StatefulWidget {
 }
 
 class _AddProductScreenState extends State<AddProductScreen> {
+  TextEditingController companyNameController = TextEditingController();
+  TextEditingController productNameController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
+
+  void addProduct(
+      {String companyName, String productName, String description}) async {
+    await AppConfig.runTransaction(
+            functionName: 'createNewProduct',
+            parameter: [
+          Uuid().v1(),
+          productName,
+          "PictureURL",
+          description,
+          companyName
+        ])
+        .then((value) => print(value)
+            // Navigator.pop(context),
+            )
+        .catchError(
+      (onError) {
+        print(onError);
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    companyNameController.dispose();
+    productNameController.dispose();
+    descriptionController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,6 +120,20 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 32.0, vertical: 8),
                   child: TextFormField(
+                    controller: companyNameController,
+                    decoration: InputDecoration(
+                      labelText: "Company Name",
+                      labelStyle: GoogleFonts.poppins(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 32.0, vertical: 8),
+                  child: TextFormField(
+                    controller: productNameController,
                     decoration: InputDecoration(
                       labelText: "Product Name",
                       labelStyle: GoogleFonts.poppins(
@@ -97,18 +146,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 32.0, vertical: 8),
                   child: TextFormField(
-                    decoration: InputDecoration(
-                      labelText: "Product Price",
-                      labelStyle: GoogleFonts.poppins(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 32.0, vertical: 8),
-                  child: TextFormField(
+                    controller: descriptionController,
                     maxLines: 3,
                     decoration: InputDecoration(
                       labelText: " Description",
@@ -125,7 +163,13 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   padding: const EdgeInsets.symmetric(
                       horizontal: 32.0, vertical: 16),
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      addProduct(
+                        companyName: companyNameController.text,
+                        description: descriptionController.text,
+                        productName: productNameController.text,
+                      );
+                    },
                     child: Container(
                       height: 50,
                       width: MediaQuery.of(context).size.width,
