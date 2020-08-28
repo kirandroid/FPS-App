@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fps/signin.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoadingScreen extends StatefulWidget {
   LoadingScreen({Key key}) : super(key: key);
@@ -22,7 +23,11 @@ class _LoadingScreenState extends State<LoadingScreen> {
                 height: 170,
                 width: MediaQuery.of(context).size.width,
               ),
-              Image.asset("asset/fpsText.png"),
+              Text(
+                'fake product scanner',
+                style:
+                    GoogleFonts.poppins(fontSize: 24, color: Colors.grey[300]),
+              ),
               SizedBox(height: 30),
               Image.asset(
                 "asset/logo1.png",
@@ -40,11 +45,11 @@ class _LoadingScreenState extends State<LoadingScreen> {
                       MaterialPageRoute(builder: (context) => SignInScreen()));
                 },
                 child: Container(
-                  height: 41,
+                  height: 50,
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
-                      color: Color(0xffEC686F)),
+                      color: Colors.redAccent),
                   child: Center(
                       child: Text(
                     'let\'s get started',

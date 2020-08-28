@@ -125,11 +125,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   child: InkWell(
                     onTap: () {},
                     child: Container(
-                      height: 41,
+                      height: 50,
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
-                          color: Color(0xffEC686F)),
+                          color: Colors.redAccent),
                       child: Center(
                           child: Text(
                         'Sign Up',
@@ -153,12 +153,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               builder: (context) => SignInScreen()));
                     },
                     child: Container(
-                      height: 41,
+                      height: 50,
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                         border: Border.all(width: 2, color: Colors.white),
                         borderRadius: BorderRadius.circular(30),
-                        // color: Color(0xffEC686F),
                       ),
                       child: Center(
                           child: Row(
@@ -169,7 +168,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             style: GoogleFonts.poppins(
                               color: Colors.white,
                               fontSize: 20,
-                              // fontWeight: FontWeight.bold,
                             ),
                           ),
                           Text(

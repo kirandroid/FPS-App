@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fps/addproduct.dart';
+import 'package:fps/dashboard.dart';
 import 'package:fps/signup.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -83,17 +84,16 @@ class _SignInScreenState extends State<SignInScreen> {
               padding: const EdgeInsets.all(32.0),
               child: InkWell(
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => AddProductScreen()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Dashboard()));
                 },
                 child: Container(
-                  height: 41,
+                  height: 50,
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: Color(0xffEC686F)),
+                    borderRadius: BorderRadius.circular(30),
+                    color: Colors.redAccent,
+                  ),
                   child: Center(
                       child: Text(
                     'Sign In',
@@ -114,7 +114,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       MaterialPageRoute(builder: (context) => SignUpScreen()));
                 },
                 child: Container(
-                  height: 41,
+                  height: 50,
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                     border: Border.all(width: 2, color: Colors.white),
