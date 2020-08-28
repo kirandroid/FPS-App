@@ -1,17 +1,18 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:fps/features/dashboard/dashboard.dart';
-import 'package:fps/scanProduct.dart';
-import 'package:fps/features/auth/signin.dart';
+import 'package:fps/features/dashboard/presentation/pages/dashboard_screen.dart';
+import 'package:fps/features/scanProduct/presentation/pages/scan_product_screen.dart';
+import 'package:fps/features/auth/presentation/pages/sign_in_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class AllProducts extends StatefulWidget {
-  AllProducts({Key key}) : super(key: key);
+class AllProductScreen extends StatefulWidget {
+  AllProductScreen({Key key}) : super(key: key);
 
   @override
-  _AllProductsState createState() => _AllProductsState();
+  _AllProductScreenState createState() => _AllProductScreenState();
 }
 
-class _AllProductsState extends State<AllProducts> {
+class _AllProductScreenState extends State<AllProductScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,8 +26,7 @@ class _AllProductsState extends State<AllProducts> {
                 children: [
                   InkWell(
                     onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Dashboard()));
+                      ExtendedNavigator.of(context).pop();
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(left: 16.0),

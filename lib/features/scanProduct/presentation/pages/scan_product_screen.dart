@@ -1,19 +1,20 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:barcode_scan/platform_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fps/features/dashboard/dashboard.dart';
-import 'package:fps/productInfo.dart';
+import 'package:fps/features/dashboard/presentation/pages/dashboard_screen.dart';
+import 'package:fps/features/allProducts/presentation/widgets/productInfo.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 
-class ScanProduct extends StatefulWidget {
-  ScanProduct({Key key}) : super(key: key);
+class ScanProductScreen extends StatefulWidget {
+  ScanProductScreen({Key key}) : super(key: key);
 
   @override
-  _ScanProductState createState() => _ScanProductState();
+  _ScanProductScreenState createState() => _ScanProductScreenState();
 }
 
-class _ScanProductState extends State<ScanProduct> {
+class _ScanProductScreenState extends State<ScanProductScreen> {
   String barcode = "";
   @override
   Widget build(BuildContext context) {
@@ -28,8 +29,7 @@ class _ScanProductState extends State<ScanProduct> {
                 children: [
                   InkWell(
                     onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Dashboard()));
+                      ExtendedNavigator.of(context).pop();
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(left: 16.0),
@@ -52,10 +52,7 @@ class _ScanProductState extends State<ScanProduct> {
                     padding: const EdgeInsets.only(right: 16.0),
                     child: InkWell(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Dashboard()));
+                        ExtendedNavigator.of(context).pop();
                       },
                       child: Icon(
                         Icons.exit_to_app,

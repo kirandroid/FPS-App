@@ -1,18 +1,13 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:fps/features/addProduct/addproduct.dart';
-import 'package:fps/features/allProducts/allProducts.dart';
-import 'package:fps/scanProduct.dart';
-import 'package:fps/features/auth/signin.dart';
+import 'package:fps/core/routes/router.gr.dart';
+import 'package:fps/features/addProduct/presentation/pages/add_product_screen.dart';
+import 'package:fps/features/allProducts/presentation/pages/all_product_screen.dart';
+import 'package:fps/features/scanProduct/presentation/pages/scan_product_screen.dart';
+import 'package:fps/features/auth/presentation/pages/sign_in_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Dashboard extends StatefulWidget {
-  Dashboard({Key key}) : super(key: key);
-
-  @override
-  _DashboardState createState() => _DashboardState();
-}
-
-class _DashboardState extends State<Dashboard> {
+class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,10 +85,7 @@ class _DashboardState extends State<Dashboard> {
               padding: const EdgeInsets.all(24.0),
               child: InkWell(
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => AddProductScreen()));
+                  ExtendedNavigator.of(context).push(Routes.addProductScreen);
                 },
                 child: Container(
                   height: 50,
@@ -118,8 +110,7 @@ class _DashboardState extends State<Dashboard> {
               padding: const EdgeInsets.all(24.0),
               child: InkWell(
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => AllProducts()));
+                  ExtendedNavigator.of(context).push(Routes.allProductScreen);
                 },
                 child: Container(
                   height: 50,
@@ -144,8 +135,7 @@ class _DashboardState extends State<Dashboard> {
               padding: const EdgeInsets.all(24.0),
               child: InkWell(
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => ScanProduct()));
+                  ExtendedNavigator.of(context).push(Routes.scanProductScreen);
                 },
                 child: Container(
                   height: 50,

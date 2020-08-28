@@ -1,7 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:fps/home.dart';
-import 'package:fps/features/getStarted/loadingScreen.dart';
-import 'package:fps/scanProduct.dart';
+import 'core/routes/router.gr.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,7 +11,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoadingScreen(),
+      builder: ExtendedNavigator.builder(
+          router: Router(),
+          initialRoute: '/',
+          builder: (ctx, extendedNav) => extendedNav),
     );
   }
 }

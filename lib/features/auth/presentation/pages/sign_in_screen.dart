@@ -1,7 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:fps/features/addProduct/addproduct.dart';
-import 'package:fps/features/dashboard/dashboard.dart';
-import 'package:fps/features/auth/signup.dart';
+import 'package:fps/core/routes/router.gr.dart';
+import 'package:fps/features/addProduct/presentation/pages/add_product_screen.dart';
+import 'package:fps/features/dashboard/presentation/pages/dashboard_screen.dart';
+import 'package:fps/features/auth/presentation/pages/sign_up_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -84,8 +86,8 @@ class _SignInScreenState extends State<SignInScreen> {
               padding: const EdgeInsets.all(32.0),
               child: InkWell(
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Dashboard()));
+                  ExtendedNavigator.of(context).pushAndRemoveUntil(
+                      Routes.dashboardScreen, (route) => false);
                 },
                 child: Container(
                   height: 50,
@@ -110,8 +112,7 @@ class _SignInScreenState extends State<SignInScreen> {
               padding: const EdgeInsets.all(32.0),
               child: InkWell(
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SignUpScreen()));
+                  ExtendedNavigator.of(context).pushSignUpScreen();
                 },
                 child: Container(
                   height: 50,

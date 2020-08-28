@@ -1,15 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:fps/features/auth/signin.dart';
+import 'package:fps/core/routes/router.gr.dart';
+import 'package:fps/features/auth/presentation/pages/sign_in_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LoadingScreen extends StatefulWidget {
-  LoadingScreen({Key key}) : super(key: key);
-
-  @override
-  _LoadingScreenState createState() => _LoadingScreenState();
-}
-
-class _LoadingScreenState extends State<LoadingScreen> {
+class GetStartedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,8 +36,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
               padding: const EdgeInsets.all(24.0),
               child: InkWell(
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SignInScreen()));
+                  ExtendedNavigator.of(context).push(Routes.signInScreen);
                 },
                 child: Container(
                   height: 50,
