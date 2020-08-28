@@ -34,12 +34,10 @@ class AppConfig {
           .sendTransaction(
               credentials,
               Transaction.callContract(
-                maxGas: 10000000,
-                contract: deployedContract,
-                function: function,
-                parameters: parameter,
-                gasPrice: EtherAmount.fromUnitAndValue(EtherUnit.gwei, 1),
-              ),
+                  maxGas: 800000,
+                  contract: deployedContract,
+                  function: function,
+                  parameters: parameter),
               fetchChainIdFromNetworkId: true)
           .then((value) => print(value))
           .catchError(

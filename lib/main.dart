@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fps/home.dart';
+import 'package:fps/loadingScreen.dart';
+import 'package:fps/scanProduct.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,7 +11,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomeScreen(),
+      debugShowCheckedModeBanner: false,
+      home: LoadingScreen(),
     );
   }
 }
