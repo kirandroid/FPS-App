@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fps/addproduct.dart';
-import 'package:fps/dashboard.dart';
-import 'package:fps/signup.dart';
+import 'package:fps/features/addProduct/addproduct.dart';
+import 'package:fps/features/dashboard/dashboard.dart';
+import 'package:fps/features/auth/signup.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SignInScreen extends StatefulWidget {

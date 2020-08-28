@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fps/core/app_config.dart';
-import 'package:fps/dashboard.dart';
+import 'package:fps/core/utils/app_config.dart';
+import 'package:fps/features/dashboard/dashboard.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:uuid/uuid.dart';
 

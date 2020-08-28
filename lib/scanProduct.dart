@@ -1,7 +1,7 @@
 import 'package:barcode_scan/platform_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fps/dashboard.dart';
+import 'package:fps/features/dashboard/dashboard.dart';
 import 'package:fps/productInfo.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:barcode_scan/barcode_scan.dart';

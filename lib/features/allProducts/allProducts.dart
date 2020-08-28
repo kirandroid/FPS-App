@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fps/dashboard.dart';
+import 'package:fps/features/dashboard/dashboard.dart';
 import 'package:fps/scanProduct.dart';
-import 'package:fps/signin.dart';
+import 'package:fps/features/auth/signin.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AllProducts extends StatefulWidget {

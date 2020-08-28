@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fps/home.dart';
-import 'package:fps/loadingScreen.dart';
+import 'package:fps/features/getStarted/loadingScreen.dart';
 import 'package:fps/scanProduct.dart';
 
 void main() {

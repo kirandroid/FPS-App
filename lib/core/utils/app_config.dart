@@ -1,5 +1,5 @@
-import 'package:fps/core/contract_parser.dart';
-import 'package:fps/core/creds.dart';
+import 'package:fps/core/utils/contract_parser.dart';
+import 'package:fps/core/utils/creds.dart';
 import 'package:web3dart/web3dart.dart';
 import 'package:http/http.dart';
 

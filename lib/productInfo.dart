@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fps/dashboard.dart';
+import 'package:fps/features/dashboard/dashboard.dart';
 import 'package:fps/scanProduct.dart';
 import 'package:google_fonts/google_fonts.dart';
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:fps/addproduct.dart';
-import 'package:fps/allProducts.dart';
+import 'package:fps/features/addProduct/addproduct.dart';
+import 'package:fps/features/allProducts/allProducts.dart';
 import 'package:fps/scanProduct.dart';
-import 'package:fps/signin.dart';
+import 'package:fps/features/auth/signin.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Dashboard extends StatefulWidget {

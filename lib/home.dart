@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fps/core/app_config.dart';
+import 'package:fps/core/utils/app_config.dart';
 import 'package:web3dart/web3dart.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
         .call(contract: contract, function: getProducts, params: ["ki"]).then(
       (productList) async {
         setState(() {
-          productName = productList.first[0];
+          productName = productList.first[0].toString();
         });
       },
     );
