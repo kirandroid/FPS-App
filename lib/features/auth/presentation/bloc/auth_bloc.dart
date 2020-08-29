@@ -17,8 +17,6 @@ part 'auth_state.dart';
 
 @injectable
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  AuthBloc() : super(AuthInitial());
-
   @override
   Stream<AuthState> mapEventToState(
     AuthEvent event,
@@ -28,8 +26,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       try {
         final UserCredential userCredential =
             await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: event.email,
-          password: event.password,
+          email: event.email.trim(),
+          password: event.password.trim(),
         );
 
         final DocumentSnapshot userDoc = await FirebaseFirestore.instance
@@ -76,8 +74,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       try {
         final UserCredential userCredential =
             await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: event.email,
-          password: event.password,
+          email: event.email.trim(),
+          password: event.password.trim(),
         );
 
         await FirebaseFirestore.instance
@@ -111,4 +109,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
     }
   }
+
+  @override
+  AuthState get initialState => AuthInitial();
 }

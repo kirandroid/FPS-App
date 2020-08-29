@@ -9,7 +9,7 @@ class GetStartedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xff335C67),
-      body: Stack(
+      body: ListView(
         children: [
           Column(
             children: [
@@ -28,35 +28,76 @@ class GetStartedScreen extends StatelessWidget {
                 "asset/logo1.png",
                 height: 270,
               ),
-            ],
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: InkWell(
-                onTap: () {
-                  ExtendedNavigator.of(context).push(Routes.signInScreen);
-                },
-                child: Container(
-                  height: 50,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: Colors.redAccent),
-                  child: Center(
-                      child: Text(
-                    'let\'s get started',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: InkWell(
+                    onTap: () {
+                      ExtendedNavigator.of(context)
+                          .push(Routes.scanProductScreen);
+                    },
+                    child: Container(
+                      height: 50,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: Colors.redAccent),
+                      child: Center(
+                          child: Text(
+                        'Scan Product',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )),
                     ),
-                  )),
+                  ),
                 ),
               ),
-            ),
-          )
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 32.0, vertical: 4),
+                child: InkWell(
+                  onTap: () {
+                    ExtendedNavigator.of(context).pushSignInScreen();
+                  },
+                  child: Container(
+                    height: 50,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      border: Border.all(width: 2, color: Colors.white),
+                      borderRadius: BorderRadius.circular(30),
+                      // color: Color(0xffEC686F),
+                    ),
+                    child: Center(
+                        child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Proceed to ',
+                          style: GoogleFonts.poppins(
+                            color: Colors.white,
+                            fontSize: 20,
+                            // fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          ' Login',
+                          style: GoogleFonts.poppins(
+                            color: Color(0xff2A9D8F),
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    )),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
