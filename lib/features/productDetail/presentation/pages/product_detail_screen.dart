@@ -32,7 +32,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           widget.productResponse.id,
         ]).then((value) {
       setState(() {
-        generated = true;
+        generated = !generated;
         barHash = hash;
       });
     });
