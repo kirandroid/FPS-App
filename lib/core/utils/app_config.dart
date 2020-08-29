@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:fps/core/utils/contract_parser.dart';
 import 'package:fps/core/utils/creds.dart';
 import 'package:web3dart/web3dart.dart';
@@ -20,6 +21,19 @@ class AppConfig {
     return contract;
   }
 
+  static Future<List> callFunction(
+      {@required String functionName, @required List param}) async {
+    final DeployedContract contract = await AppConfig.contract;
+
+    final function = contract.function(functionName);
+
+    final List returnList = await AppConfig()
+        .ethClient()
+        .call(contract: contract, function: function, params: param);
+
+    return returnList;
+  }
+
   static Future<bool> runTransaction(
       {String functionName, List parameter}) async {
     final DeployedContract deployedContract =
@@ -39,10 +53,12 @@ class AppConfig {
                   function: function,
                   parameters: parameter),
               fetchChainIdFromNetworkId: true)
-          .then((value) => print(value))
+          .then(
+            (value) => print(value),
+          )
           .catchError(
         (onError) {
-          print(onError);
+          throw onError;
         },
       );
       return true;

@@ -92,23 +92,15 @@ class Router extends RouterBase {
       );
     },
     SignInScreen: (data) {
-      final args = data.getArgs<SignInScreenArguments>(
-        orElse: () => SignInScreenArguments(),
-      );
       return PageRouteBuilder<dynamic>(
-        pageBuilder: (context, animation, secondaryAnimation) =>
-            SignInScreen(key: args.key),
+        pageBuilder: (context, animation, secondaryAnimation) => SignInScreen(),
         settings: data,
         transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
       );
     },
     SignUpScreen: (data) {
-      final args = data.getArgs<SignUpScreenArguments>(
-        orElse: () => SignUpScreenArguments(),
-      );
       return PageRouteBuilder<dynamic>(
-        pageBuilder: (context, animation, secondaryAnimation) =>
-            SignUpScreen(key: args.key),
+        pageBuilder: (context, animation, secondaryAnimation) => SignUpScreen(),
         settings: data,
         transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
       );
@@ -161,21 +153,9 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
         arguments: AllProductScreenArguments(key: key),
       );
 
-  Future<dynamic> pushSignInScreen({
-    Key key,
-  }) =>
-      push<dynamic>(
-        Routes.signInScreen,
-        arguments: SignInScreenArguments(key: key),
-      );
+  Future<dynamic> pushSignInScreen() => push<dynamic>(Routes.signInScreen);
 
-  Future<dynamic> pushSignUpScreen({
-    Key key,
-  }) =>
-      push<dynamic>(
-        Routes.signUpScreen,
-        arguments: SignUpScreenArguments(key: key),
-      );
+  Future<dynamic> pushSignUpScreen() => push<dynamic>(Routes.signUpScreen);
 
   Future<dynamic> pushDashboardScreen() =>
       push<dynamic>(Routes.dashboardScreen);
@@ -203,18 +183,6 @@ class AddProductScreenArguments {
 class AllProductScreenArguments {
   final Key key;
   AllProductScreenArguments({this.key});
-}
-
-/// SignInScreen arguments holder class
-class SignInScreenArguments {
-  final Key key;
-  SignInScreenArguments({this.key});
-}
-
-/// SignUpScreen arguments holder class
-class SignUpScreenArguments {
-  final Key key;
-  SignUpScreenArguments({this.key});
 }
 
 /// ScanProductScreen arguments holder class

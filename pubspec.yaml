@@ -36,6 +36,7 @@ dependencies:
   flutter_bloc: ^6.0.1
   firebase_auth: ^0.18.0+1
   cloud_firestore: ^0.14.0+2
+  firebase_core: ^0.5.0
 
 dev_dependencies:
   flutter_test:
@@ -62,4 +63,3 @@ flutter:
     - asset/fpsText.png
     - asset/scanner.png
     - asset/error.png
-
