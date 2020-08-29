@@ -1,6 +1,6 @@
-# fps
+# fps (fake product scanner)
 
-AFPS is a mobile app that allows the manufacturer to track their products. The project uses the blockchain technology to identify fake products. The users can scan product Qr to identify. #FINTECH
+FPS is a mobile app that allows the manufacturer to track their products. The project uses the blockchain technology to identify fake products. The users can scan product Qr to identify. #FINTECH
 
 #Installation
 
