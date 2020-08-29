@@ -134,7 +134,7 @@ class _AllProductScreenState extends State<AllProductScreen> {
                                     ExtendedNavigator.of(context).push(
                                       Routes.productDetailScreen,
                                       arguments: ProductDetailScreenArguments(
-                                          productId: productResponse.id),
+                                          productResponse: productResponse),
                                     );
                                   },
                                   child: Container(

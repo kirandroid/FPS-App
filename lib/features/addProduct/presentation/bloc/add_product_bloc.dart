@@ -33,9 +33,8 @@ class AddProductBloc extends Bloc<AddProductEvent, AddProductState> {
               FirebaseAuth.instance.currentUser.uid
             ]);
         yield AddProductSuccess();
-        ExtendedNavigator.of(event.context).pushAndRemoveUntil(
-            Routes.productDetailScreen, (route) => false,
-            arguments: ProductDetailScreenArguments(productId: productId));
+        ExtendedNavigator.of(event.context)
+            .pushAndRemoveUntil(Routes.allProductScreen, (route) => false);
       } catch (e) {
         yield AddProductError(message: e);
       }

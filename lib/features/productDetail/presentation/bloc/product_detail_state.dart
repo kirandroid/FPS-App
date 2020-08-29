@@ -7,7 +7,11 @@ class ProductDetailInitial extends ProductDetailState {}
 
 class ProductDetailLoading extends ProductDetailState {}
 
-class ProductDetailSuccess extends ProductDetailState {}
+class ProductDetailSuccess extends ProductDetailState {
+  final ProductResponse response;
+
+  ProductDetailSuccess({this.response});
+}
 
 class ProductDetailError extends ProductDetailState {
   final String message;

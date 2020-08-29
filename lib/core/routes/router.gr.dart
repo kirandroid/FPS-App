@@ -10,6 +10,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../../features/addProduct/presentation/pages/add_product_screen.dart';
+import '../../features/allProducts/domain/entities/product_response.dart';
 import '../../features/allProducts/presentation/pages/all_product_screen.dart';
 import '../../features/auth/presentation/pages/sign_in_screen.dart';
 import '../../features/auth/presentation/pages/sign_up_screen.dart';
@@ -134,7 +135,7 @@ class Router extends RouterBase {
         pageBuilder: (context, animation, secondaryAnimation) =>
             ProductDetailScreen(
           key: args.key,
-          productId: args.productId,
+          productResponse: args.productResponse,
         ),
         settings: data,
         transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
@@ -186,11 +187,12 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
 
   Future<dynamic> pushProductDetailScreen({
     Key key,
-    @required String productId,
+    @required ProductResponse productResponse,
   }) =>
       push<dynamic>(
         Routes.productDetailScreen,
-        arguments: ProductDetailScreenArguments(key: key, productId: productId),
+        arguments: ProductDetailScreenArguments(
+            key: key, productResponse: productResponse),
       );
 }
 
@@ -219,6 +221,6 @@ class ScanProductScreenArguments {
 /// ProductDetailScreen arguments holder class
 class ProductDetailScreenArguments {
   final Key key;
-  final String productId;
-  ProductDetailScreenArguments({this.key, @required this.productId});
+  final ProductResponse productResponse;
+  ProductDetailScreenArguments({this.key, @required this.productResponse});
 }
