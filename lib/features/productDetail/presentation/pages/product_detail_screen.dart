@@ -1,12 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fps/core/utils/app_config.dart';
 import 'package:fps/core/utils/colors.dart';
 import 'package:fps/core/utils/text_style.dart';
 import 'package:fps/features/allProducts/domain/entities/product_response.dart';
 import 'package:fps/features/productDetail/presentation/bloc/product_detail_bloc.dart';
 import 'package:fps/injection.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:qr_flutter/qr_flutter.dart';
+import 'package:uuid/uuid.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   final ProductResponse productResponse;
@@ -18,6 +21,23 @@ class ProductDetailScreen extends StatefulWidget {
 }
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
+  bool generated = false;
+  String barHash = '';
+  void generateQR() async {
+    String hash = Uuid().v1();
+    await AppConfig.runTransaction(
+        functionName: 'createProductItem',
+        parameter: [
+          hash,
+          widget.productResponse.id,
+        ]).then((value) {
+      setState(() {
+        generated = true;
+        barHash = hash;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,9 +95,24 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     style:
                         StyleText.popMedium.copyWith(color: UIColors.white60),
                   ),
+                  RaisedButton(
+                    onPressed: () {
+                      generateQR();
+                    },
+                    child: Text("Generate QR"),
+                  ),
+                  generated
+                      ? QrImage(
+                          data: barHash,
+                          version: QrVersions.auto,
+                          foregroundColor: Colors.white,
+                          size: 200,
+                          gapless: false,
+                        )
+                      : Container()
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
