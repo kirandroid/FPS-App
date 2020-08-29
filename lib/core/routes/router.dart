@@ -8,7 +8,6 @@ import 'package:fps/features/dashboard/presentation/pages/dashboard_screen.dart'
 import 'package:fps/features/getStarted/get_started_screen.dart';
 import 'package:fps/features/scanProduct/presentation/pages/scan_product_screen.dart';
 import 'package:fps/features/splash/splash_screen.dart';
-import 'package:fps/features/userScreen.dart';
 
 @MaterialAutoRouter(
   generateNavigationHelperExtension: true,
@@ -40,10 +39,6 @@ import 'package:fps/features/userScreen.dart';
     ),
     CustomRoute(
       page: ScanProductScreen,
-      transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
-    ),
-    CustomRoute(
-      page: UserScreen,
       transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
     ),
   ],
