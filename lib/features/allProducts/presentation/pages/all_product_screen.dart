@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:fps/core/utils/app_config.dart';
 import 'package:fps/features/dashboard/presentation/pages/dashboard_screen.dart';
 import 'package:fps/features/scanProduct/presentation/pages/scan_product_screen.dart';
 import 'package:fps/features/auth/presentation/pages/sign_in_screen.dart';
@@ -13,6 +14,11 @@ class AllProductScreen extends StatefulWidget {
 }
 
 class _AllProductScreenState extends State<AllProductScreen> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

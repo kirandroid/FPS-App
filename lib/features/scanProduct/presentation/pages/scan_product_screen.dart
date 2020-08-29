@@ -2,10 +2,12 @@ import 'package:auto_route/auto_route.dart';
 import 'package:barcode_scan/platform_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fps/core/utils/app_config.dart';
 import 'package:fps/features/dashboard/presentation/pages/dashboard_screen.dart';
 import 'package:fps/features/allProducts/presentation/widgets/productInfo.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:barcode_scan/barcode_scan.dart';
+import 'package:uuid/uuid.dart';
 
 class ScanProductScreen extends StatefulWidget {
   ScanProductScreen({Key key}) : super(key: key);
@@ -91,9 +93,10 @@ class _ScanProductScreenState extends State<ScanProductScreen> {
             Padding(
               padding: const EdgeInsets.all(24.0),
               child: InkWell(
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => ProductInfo()));
+                onTap: () async {
+                  await scan();
+                  // Navigator.push(context,
+                  //     MaterialPageRoute(builder: (context) => ProductInfo()));
                 },
                 child: Container(
                   height: 50,
@@ -120,22 +123,50 @@ class _ScanProductScreenState extends State<ScanProductScreen> {
     );
   }
 
-  // Future scan() async {
-  //   try {
-  //     String barcode = (await BarcodeScanner.scan()) as String;
-  //     setState(() {
-  //       this.barcode = barcode;
-  //     });
-  //   } on PlatformException catch (e) {
-  //     if (e.code == BarcodeScanner.cameraAccessDenied) {
-  //       setState(() {
-  //         this.barcode = 'Camera Permission not granted';
-  //       });
-  //     }
-  //   } on FormatException {
-  //     setState(() {
-  //       this.barcode = "Error";
-  //     });
-  //   }
-  // }
+  Future scan() async {
+    try {
+      final ScanResult barcode = await BarcodeScanner.scan();
+      await verifyProduct(hash: barcode.rawContent);
+    } on PlatformException catch (e) {
+      if (e.code == BarcodeScanner.cameraAccessDenied) {
+        setState(() {
+          barcode = 'Camera Permission not granted';
+        });
+      }
+    } on FormatException {
+      setState(() {
+        barcode = "Error";
+      });
+    }
+  }
+
+  void verifyProduct({String hash}) async {
+    final bool status = await AppConfig.runTransaction(
+        functionName: 'createProductItem', parameter: [hash, hash]);
+    print(status);
+
+    AppConfig.callFunction(functionName: 'verifyProduct', param: [hash])
+        .then((value) {
+      print(value);
+      if (value[0][0] != "") {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ProductInfo(
+                      status: "REAL",
+                    )));
+      } else {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ProductInfo(
+                      status: "FAKE",
+                    )));
+      }
+    }).catchError(
+      (onError) {
+        print(onError);
+      },
+    );
+  }
 }

@@ -28,7 +28,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
           description,
           companyName
         ])
-        .then((value) => print(value)
+        .then((value) => print("success")
             // Navigator.pop(context),
             )
         .catchError(

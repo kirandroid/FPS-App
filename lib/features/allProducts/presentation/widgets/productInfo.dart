@@ -6,14 +6,15 @@ import 'package:fps/features/scanProduct/presentation/pages/scan_product_screen.
 import 'package:google_fonts/google_fonts.dart';
 
 class ProductInfo extends StatefulWidget {
-  ProductInfo({Key key}) : super(key: key);
+  final String status;
+  ProductInfo({Key key, this.status}) : super(key: key);
 
   @override
   _ProductInfoState createState() => _ProductInfoState();
 }
 
 class _ProductInfoState extends State<ProductInfo> {
-  String status = "FAKE";
+  // String status = "FAKE";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,7 +86,7 @@ class _ProductInfoState extends State<ProductInfo> {
                 ),
               ),
             ),
-            status == 'FAKE'
+            widget.status == 'FAKE'
                 ? Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
@@ -181,7 +182,7 @@ class _ProductInfoState extends State<ProductInfo> {
                     ),
                   ),
                   SizedBox(width: 20),
-                  status == "FAKE"
+                  widget.status == "FAKE"
                       ? Text(
                           'FAKE',
                           style: GoogleFonts.poppins(
