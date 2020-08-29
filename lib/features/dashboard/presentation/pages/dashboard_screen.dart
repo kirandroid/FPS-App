@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fps/core/routes/router.gr.dart';
 import 'package:fps/features/addProduct/presentation/pages/add_product_screen.dart';
@@ -31,11 +32,10 @@ class DashboardScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(right: 16.0),
                     child: InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => SignInScreen()));
+                      onTap: () async {
+                        await FirebaseAuth.instance.signOut();
+                        ExtendedNavigator.of(context).pushAndRemoveUntil(
+                            Routes.getStartedScreen, (route) => false);
                       },
                       child: Icon(
                         Icons.exit_to_app,

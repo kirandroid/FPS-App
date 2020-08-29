@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fps/core/routes/router.gr.dart';
@@ -16,12 +17,24 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
   }
 
-  void checkCurrentUser() {
-    FirebaseAuth.instance.currentUser != null
-        ? ExtendedNavigator.of(context)
-            .pushAndRemoveUntil(Routes.dashboardScreen, (route) => false)
-        : ExtendedNavigator.of(context)
+  void checkCurrentUser() async {
+    if (FirebaseAuth.instance.currentUser != null) {
+      final DocumentSnapshot userDoc = await FirebaseFirestore.instance
+          .collection('user')
+          .doc(FirebaseAuth.instance.currentUser.uid)
+          .get();
+
+      if (userDoc.get("verified") == true) {
+        ExtendedNavigator.of(context)
+            .pushAndRemoveUntil(Routes.dashboardScreen, (route) => false);
+      } else {
+        ExtendedNavigator.of(context)
             .pushAndRemoveUntil(Routes.getStartedScreen, (route) => false);
+      }
+    } else {
+      ExtendedNavigator.of(context)
+          .pushAndRemoveUntil(Routes.getStartedScreen, (route) => false);
+    }
   }
 
   @override

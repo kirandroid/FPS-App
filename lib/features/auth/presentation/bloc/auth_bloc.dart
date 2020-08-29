@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:bloc/bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fps/core/routes/router.gr.dart';
@@ -25,13 +26,30 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     if (event is SignInUser) {
       yield AuthLoading();
       try {
-        await FirebaseAuth.instance.signInWithEmailAndPassword(
+        final UserCredential userCredential =
+            await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: event.email,
           password: event.password,
         );
-        yield AuthSuccess();
-        ExtendedNavigator.of(event.context)
-            .pushAndRemoveUntil(Routes.dashboardScreen, (route) => false);
+
+        final DocumentSnapshot userDoc = await FirebaseFirestore.instance
+            .collection('user')
+            .doc(userCredential.user.uid)
+            .get();
+
+        if (userDoc.get("verified") == true) {
+          yield AuthSuccess();
+          ExtendedNavigator.of(event.context)
+              .pushAndRemoveUntil(Routes.dashboardScreen, (route) => false);
+        } else {
+          yield AuthError(message: "User Not Verified");
+          Toast().showToast(
+            bgColor: UIColors.red,
+            context: event.context,
+            title: 'User Not Verified',
+            message: 'Error',
+          );
+        }
       } catch (e) {
         if (e.code == "invalid-email" ||
             e.code == 'wrong-password' ||
@@ -61,6 +79,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           email: event.email,
           password: event.password,
         );
+
+        await FirebaseFirestore.instance
+            .collection("user")
+            .doc(userCredential.user.uid)
+            .set({"verified": false});
+
         await AppConfig.runTransaction(
             functionName: 'createNewCompany',
             parameter: [userCredential.user.uid, event.companyName]);
