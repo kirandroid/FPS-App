@@ -3,6 +3,7 @@ import 'package:barcode_scan/platform_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fps/core/utils/app_config.dart';
+import 'package:fps/features/allProducts/domain/entities/product_response.dart';
 import 'package:fps/features/dashboard/presentation/pages/dashboard_screen.dart';
 import 'package:fps/features/allProducts/presentation/widgets/productInfo.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -141,6 +142,7 @@ class _ScanProductScreenState extends State<ScanProductScreen> {
   }
 
   void verifyProduct({String hash}) async {
+    //to be removed and added while generating hash
     final bool status = await AppConfig.runTransaction(
         functionName: 'createProductItem', parameter: [hash, hash]);
     print(status);
@@ -148,12 +150,14 @@ class _ScanProductScreenState extends State<ScanProductScreen> {
     AppConfig.callFunction(functionName: 'verifyProduct', param: [hash])
         .then((value) {
       print(value);
-      if (value[0][0] != "") {
+      ProductResponse product = ProductResponse.fromMap(value[0]);
+      if (product.id != "") {
         Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => ProductInfo(
                       status: "REAL",
+                      product: product,
                     )));
       } else {
         Navigator.push(
