@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fps/core/routes/router.gr.dart';
 import 'package:fps/core/utils/colors.dart';
 import 'package:fps/features/allProducts/domain/entities/product_response.dart';
 import 'package:fps/features/allProducts/presentation/bloc/all_product_bloc.dart';
@@ -129,7 +130,13 @@ class _AllProductScreenState extends State<AllProductScreen> {
                               padding: const EdgeInsets.only(bottom: 10),
                               child: Card(
                                 child: InkWell(
-                                  onTap: () {},
+                                  onTap: () {
+                                    ExtendedNavigator.of(context).push(
+                                      Routes.productDetailScreen,
+                                      arguments: ProductDetailScreenArguments(
+                                          productId: productResponse.id),
+                                    );
+                                  },
                                   child: Container(
                                     padding: EdgeInsets.all(14),
                                     decoration:

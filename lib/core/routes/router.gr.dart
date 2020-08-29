@@ -15,6 +15,7 @@ import '../../features/auth/presentation/pages/sign_in_screen.dart';
 import '../../features/auth/presentation/pages/sign_up_screen.dart';
 import '../../features/dashboard/presentation/pages/dashboard_screen.dart';
 import '../../features/getStarted/get_started_screen.dart';
+import '../../features/productDetail/presentation/pages/product_detail_screen.dart';
 import '../../features/scanProduct/presentation/pages/scan_product_screen.dart';
 import '../../features/splash/splash_screen.dart';
 
@@ -27,6 +28,7 @@ class Routes {
   static const String signUpScreen = '/sign-up-screen';
   static const String dashboardScreen = '/dashboard-screen';
   static const String scanProductScreen = '/scan-product-screen';
+  static const String productDetailScreen = '/product-detail-screen';
   static const all = <String>{
     splashScreen,
     getStartedScreen,
@@ -36,6 +38,7 @@ class Routes {
     signUpScreen,
     dashboardScreen,
     scanProductScreen,
+    productDetailScreen,
   };
 }
 
@@ -51,6 +54,7 @@ class Router extends RouterBase {
     RouteDef(Routes.signUpScreen, page: SignUpScreen),
     RouteDef(Routes.dashboardScreen, page: DashboardScreen),
     RouteDef(Routes.scanProductScreen, page: ScanProductScreen),
+    RouteDef(Routes.productDetailScreen, page: ProductDetailScreen),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -124,6 +128,18 @@ class Router extends RouterBase {
         transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
       );
     },
+    ProductDetailScreen: (data) {
+      final args = data.getArgs<ProductDetailScreenArguments>(nullOk: false);
+      return PageRouteBuilder<dynamic>(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            ProductDetailScreen(
+          key: args.key,
+          productId: args.productId,
+        ),
+        settings: data,
+        transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
+      );
+    },
   };
 }
 
@@ -167,6 +183,15 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
         Routes.scanProductScreen,
         arguments: ScanProductScreenArguments(key: key),
       );
+
+  Future<dynamic> pushProductDetailScreen({
+    Key key,
+    @required String productId,
+  }) =>
+      push<dynamic>(
+        Routes.productDetailScreen,
+        arguments: ProductDetailScreenArguments(key: key, productId: productId),
+      );
 }
 
 /// ************************************************************************
@@ -189,4 +214,11 @@ class AllProductScreenArguments {
 class ScanProductScreenArguments {
   final Key key;
   ScanProductScreenArguments({this.key});
+}
+
+/// ProductDetailScreen arguments holder class
+class ProductDetailScreenArguments {
+  final Key key;
+  final String productId;
+  ProductDetailScreenArguments({this.key, @required this.productId});
 }
