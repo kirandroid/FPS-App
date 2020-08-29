@@ -27,11 +27,15 @@ class AppConfig {
 
     final function = contract.function(functionName);
 
-    final List returnList = await AppConfig()
-        .ethClient()
-        .call(contract: contract, function: function, params: param);
-
-    return returnList;
+    try {
+      final List returnList = await AppConfig()
+          .ethClient()
+          .call(contract: contract, function: function, params: param);
+      return returnList;
+    } catch (e) {
+      print(e);
+      return [];
+    }
   }
 
   static Future<bool> runTransaction(
@@ -48,7 +52,7 @@ class AppConfig {
           .sendTransaction(
               credentials,
               Transaction.callContract(
-                  maxGas: 800000,
+                  maxGas: 1000000,
                   contract: deployedContract,
                   function: function,
                   parameters: parameter),

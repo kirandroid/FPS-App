@@ -1,19 +1,23 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:fps/core/routes/router.gr.dart';
+import 'package:fps/features/allProducts/domain/entities/product_response.dart';
 import 'package:fps/features/dashboard/presentation/pages/dashboard_screen.dart';
 import 'package:fps/features/scanProduct/presentation/pages/scan_product_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProductInfo extends StatefulWidget {
-  ProductInfo({Key key}) : super(key: key);
+  final String status;
+  final ProductResponse product;
+
+  ProductInfo({Key key, this.status, this.product}) : super(key: key);
 
   @override
   _ProductInfoState createState() => _ProductInfoState();
 }
 
 class _ProductInfoState extends State<ProductInfo> {
-  String status = "FAKE";
+  // String status = "FAKE";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,7 +89,7 @@ class _ProductInfoState extends State<ProductInfo> {
                 ),
               ),
             ),
-            status == 'FAKE'
+            widget.status == 'FAKE'
                 ? Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
@@ -122,30 +126,30 @@ class _ProductInfoState extends State<ProductInfo> {
                                 ),
                                 SizedBox(width: 10),
                                 Text(
-                                  "Product Name",
+                                  widget.product.name,
                                   style: GoogleFonts.poppins(
                                     color: Colors.white,
                                   ),
                                 ),
                               ],
                             ),
-                            Row(
-                              children: [
-                                Text(
-                                  "Product Price:",
-                                  style: GoogleFonts.poppins(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                SizedBox(width: 10),
-                                Text(
-                                  "Product Name",
-                                  style: GoogleFonts.poppins(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ],
-                            ),
+                            // Row(
+                            //   children: [
+                            //     Text(
+                            //       "Product Price:",
+                            //       style: GoogleFonts.poppins(
+                            //         color: Colors.white,
+                            //       ),
+                            //     ),
+                            //     SizedBox(width: 10),
+                            //     Text(
+                            //       "Product Name",
+                            //       style: GoogleFonts.poppins(
+                            //         color: Colors.white,
+                            //       ),
+                            //     ),
+                            //   ],
+                            // ),
                             Row(
                               children: [
                                 Text(
@@ -157,7 +161,7 @@ class _ProductInfoState extends State<ProductInfo> {
                               ],
                             ),
                             Text(
-                              "Adidas AG is a German multinational corporation, founded and headquartered in Herzogenaurach, Germany, that designs and manufactures shoes, clothing and accessories.",
+                              widget.product.description,
                               style: GoogleFonts.poppins(
                                 color: Colors.white,
                               ),
@@ -181,7 +185,7 @@ class _ProductInfoState extends State<ProductInfo> {
                     ),
                   ),
                   SizedBox(width: 20),
-                  status == "FAKE"
+                  widget.status == "FAKE"
                       ? Text(
                           'FAKE',
                           style: GoogleFonts.poppins(
