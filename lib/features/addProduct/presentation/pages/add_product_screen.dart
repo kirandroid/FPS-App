@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fps/core/utils/app_config.dart';
 import 'package:fps/features/dashboard/presentation/pages/dashboard_screen.dart';
@@ -13,12 +14,10 @@ class AddProductScreen extends StatefulWidget {
 }
 
 class _AddProductScreenState extends State<AddProductScreen> {
-  TextEditingController companyNameController = TextEditingController();
   TextEditingController productNameController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
 
-  void addProduct(
-      {String companyName, String productName, String description}) async {
+  void addProduct({String productName, String description}) async {
     await AppConfig.runTransaction(
             functionName: 'createNewProduct',
             parameter: [
@@ -26,7 +25,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
           productName,
           "PictureURL",
           description,
-          companyName
+          FirebaseAuth.instance.currentUser.uid
         ])
         .then((value) => print(value)
             // Navigator.pop(context),
@@ -40,7 +39,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
   @override
   void dispose() {
-    companyNameController.dispose();
     productNameController.dispose();
     descriptionController.dispose();
     super.dispose();
@@ -118,19 +116,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 32.0, vertical: 8),
                   child: TextFormField(
-                    controller: companyNameController,
-                    decoration: InputDecoration(
-                      labelText: "Company Name",
-                      labelStyle: GoogleFonts.poppins(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 32.0, vertical: 8),
-                  child: TextFormField(
                     controller: productNameController,
                     decoration: InputDecoration(
                       labelText: "Product Name",
@@ -163,7 +148,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   child: InkWell(
                     onTap: () {
                       addProduct(
-                        companyName: companyNameController.text,
                         description: descriptionController.text,
                         productName: productNameController.text,
                       );

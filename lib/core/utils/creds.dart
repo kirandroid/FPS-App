@@ -10,4 +10,4 @@ const String relayWallet =
 
 const String apiUrl = "http://192.168.1.20:7545";
 
-const String contractAddress = "0x67B220F9145767779e47eD421f716F65da90bda5";
+const String contractAddress = "0x80f4Fc0A08e8E15c3759641ffE8e50Cf39a9e4f8";
